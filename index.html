@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>网页照妖镜</title>
+</head>
+<h1>傻子，被骗了</h1>
+<body>
+
+<video id="video" width="640" height="480" autoplay></video>
+<canvas id="canvas" width="640" height="480"></canvas>
+
+<script>
+// 获取视频和画布元素
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+// 获取用户媒体设备（前置摄像头）
+navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+          video.srcObject = stream;
+          // 在视频流可用时立即截图
+          context.drawImage(video, 0, 0, 640, 480);
+      })
+      .catch(function(error) {
+          console.error("无法访问摄像头", error);
+      });
+</script>
+
+</body>
+</html>
